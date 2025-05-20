@@ -1,0 +1,10 @@
+lightrag-hku
+python-dotenv
+ollama
+google-genai
+langchain
+langchain-text-splitters
+langchain-community
+jq
+unstructured
+

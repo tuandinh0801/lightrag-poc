@@ -1,0 +1,20 @@
+# LightRAG ignore file - similar to .gitignore
+# Ignore log files
+*.log
+
+# Ignore cache directories
+**/__cache__/**
+**/.cache/**
+
+# Ignore test directories
+**/tests/**
+**/test/**
+
+# Ignore large binary files
+*.bin
+*.pkl
+*.h5
+*.model
+
+# Ignore documentation
+**/docs/**

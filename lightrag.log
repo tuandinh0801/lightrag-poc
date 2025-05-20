@@ -1,0 +1,982 @@
+2025-05-19 23:13:17,355 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:14:39,396 - lightrag - INFO - Created new empty graph
+2025-05-19 23:14:40,406 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:15:03,696 - lightrag - INFO - Created new empty graph
+2025-05-19 23:15:03,709 - lightrag - INFO - Process 60269 KV load full_docs with 0 records
+2025-05-19 23:15:03,709 - lightrag - INFO - Process 60269 KV load text_chunks with 0 records
+2025-05-19 23:15:03,709 - lightrag - INFO - Process 60269 KV load llm_response_cache with 0 records
+2025-05-19 23:15:03,710 - lightrag - INFO - Process 60269 doc status load doc_status with 0 records
+2025-05-19 23:15:03,714 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:15:03,716 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:15:28,802 - lightrag - INFO - Created new empty graph
+2025-05-19 23:15:28,813 - lightrag - INFO - Process 60332 KV load full_docs with 0 records
+2025-05-19 23:15:28,814 - lightrag - INFO - Process 60332 KV load text_chunks with 0 records
+2025-05-19 23:15:28,814 - lightrag - INFO - Process 60332 KV load llm_response_cache with 0 records
+2025-05-19 23:15:28,814 - lightrag - INFO - Process 60332 doc status load doc_status with 0 records
+2025-05-19 23:15:28,814 - lightrag - INFO - Stored 1 new unique documents
+2025-05-19 23:15:28,814 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:15:28,815 - lightrag - INFO - Processing 1 document(s)
+2025-05-19 23:15:28,815 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-19 23:15:28,815 - lightrag - INFO - Processing d-id: doc-2694b237813e75fa57d0fa19109f36f8
+2025-05-19 23:15:28,816 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:15:28,816 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:15:28,861 - lightrag - ERROR - limit_async: Error in decorated function: model "nomic-embed-text" not found, try pulling it first (status code: 404)
+2025-05-19 23:15:28,862 - lightrag - ERROR - limit_async: Error in decorated function: GenerativeModel.generate_content() got an unexpected keyword argument 'hashing_kv'
+2025-05-19 23:15:28,867 - lightrag - ERROR - Traceback (most recent call last):
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/lightrag.py", line 1002, in process_document
+    await asyncio.gather(*tasks)
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/kg/nano_vector_db_impl.py", line 109, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/utils.py", line 586, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/utils.py", line 370, in worker
+    result = await func(*args, **kwargs)
+                   ~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/lightrag_poc.py", line 35, in ollama_embed
+    response = ollama.embeddings(
+        model=model,
+        prompt=text,
+        options=options
+    )
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/ollama/_client.py", line 380, in embeddings
+    return self._request(
+           ~~~~~~~~~~~~~^
+      EmbeddingsResponse,
+      ^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+      ).model_dump(exclude_none=True),
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/ollama/_client.py", line 178, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/ollama/_client.py", line 122, in _request_raw
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: model "nomic-embed-text" not found, try pulling it first (status code: 404)
+
+2025-05-19 23:15:28,867 - lightrag - ERROR - Failed to extrat document 1/1: unknown_source
+2025-05-19 23:15:28,868 - lightrag - INFO - Document processing pipeline completed
+2025-05-19 23:15:28,899 - lightrag - INFO - Creating a new event loop in main thread.
+2025-05-19 23:16:34,884 - lightrag - INFO - Created new empty graph
+2025-05-19 23:16:34,895 - lightrag - INFO - Process 60523 KV load full_docs with 0 records
+2025-05-19 23:16:34,895 - lightrag - INFO - Process 60523 KV load text_chunks with 0 records
+2025-05-19 23:16:34,896 - lightrag - INFO - Process 60523 KV load llm_response_cache with 0 records
+2025-05-19 23:16:34,896 - lightrag - INFO - Process 60523 doc status load doc_status with 1 records
+2025-05-19 23:16:34,896 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:16:34,896 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:16:34,896 - lightrag - INFO - Processing 1 document(s)
+2025-05-19 23:16:34,896 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-19 23:16:34,896 - lightrag - INFO - Processing d-id: doc-2694b237813e75fa57d0fa19109f36f8
+2025-05-19 23:16:34,898 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:16:34,898 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:16:52,662 - lightrag - ERROR - limit_async: Error in decorated function: object list can't be used in 'await' expression
+2025-05-19 23:16:52,688 - lightrag - ERROR - Traceback (most recent call last):
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/lightrag.py", line 1002, in process_document
+    await asyncio.gather(*tasks)
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/kg/nano_vector_db_impl.py", line 109, in upsert
+    embeddings_list = await asyncio.gather(*embedding_tasks)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/utils.py", line 586, in wait_func
+    return await future
+           ^^^^^^^^^^^^
+  File "/Users/Shared/ssd/Work/lightrag-poc/.venv/lib/python3.13/site-packages/lightrag/utils.py", line 370, in worker
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object list can't be used in 'await' expression
+
+2025-05-19 23:16:52,688 - lightrag - ERROR - Failed to extrat document 1/1: unknown_source
+2025-05-19 23:16:52,689 - lightrag - INFO - Document processing pipeline completed
+2025-05-19 23:17:33,758 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:17:33,760 - lightrag - INFO - Creating a new event loop in main thread.
+2025-05-19 23:18:13,551 - lightrag - INFO - Created new empty graph
+2025-05-19 23:18:13,563 - lightrag - INFO - Process 60976 KV load full_docs with 0 records
+2025-05-19 23:18:13,563 - lightrag - INFO - Process 60976 KV load text_chunks with 0 records
+2025-05-19 23:18:13,563 - lightrag - INFO - Process 60976 KV load llm_response_cache with 0 records
+2025-05-19 23:18:13,563 - lightrag - INFO - Process 60976 doc status load doc_status with 1 records
+2025-05-19 23:18:13,563 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:18:13,563 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:18:13,563 - lightrag - INFO - Processing 1 document(s)
+2025-05-19 23:18:13,564 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-19 23:18:13,564 - lightrag - INFO - Processing d-id: doc-2694b237813e75fa57d0fa19109f36f8
+2025-05-19 23:18:13,566 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:18:13,566 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:18:18,110 - lightrag - INFO -  == LLM cache == saving default: 4669b455bb4e196d29417d67ce301524
+2025-05-19 23:18:19,070 - lightrag - INFO -  == LLM cache == saving default: 9c1caafd05407726f028064cd7b1d1a6
+2025-05-19 23:18:19,070 - lightrag - INFO - Chunk 1 of 1 extracted 4 Ent + 4 Rel
+2025-05-19 23:18:19,071 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-19 23:18:19,071 - lightrag - INFO - Updating 4 entities  1/1: unknown_source
+2025-05-19 23:18:19,283 - lightrag - INFO - Updating 4 relations 1/1: unknown_source
+2025-05-19 23:18:19,336 - lightrag - INFO - Writing graph with 4 nodes, 4 edges
+2025-05-19 23:18:19,341 - lightrag - INFO - In memory DB persist to disk
+2025-05-19 23:18:19,341 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-19 23:18:19,341 - lightrag - INFO - Document processing pipeline completed
+2025-05-19 23:18:20,281 - lightrag - INFO -  == LLM cache == saving hybrid: 63b13003fa3624b5aa3f6da8b9a956df
+2025-05-19 23:18:20,282 - lightrag - INFO - Process 60976 building query context...
+2025-05-19 23:18:20,282 - lightrag - INFO - Query nodes: Algorithms, Neural networks, Data sets, Feature engineering, Model training, Prediction, Supervised learning, Unsupervised learning, top_k: 60, cosine: 0.2
+2025-05-19 23:18:20,332 - lightrag - INFO - Local query uses 4 entites, 4 relations, 1 chunks
+2025-05-19 23:18:20,332 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Artificial Intelligence, Data Science, top_k: 60, cosine: 0.2
+2025-05-19 23:18:20,349 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-19 23:18:24,770 - lightrag - INFO -  == LLM cache == saving hybrid: c83167feb9593704c392c99f6fe9a666
+2025-05-19 23:18:24,782 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:31:07,873 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:31:07,887 - lightrag - INFO - Process 63247 KV load full_docs with 1 records
+2025-05-19 23:31:07,887 - lightrag - INFO - Process 63247 KV load text_chunks with 1 records
+2025-05-19 23:31:07,888 - lightrag - INFO - Process 63247 KV load llm_response_cache with 4 records
+2025-05-19 23:31:07,888 - lightrag - INFO - Process 63247 doc status load doc_status with 2 records
+2025-05-19 23:31:07,888 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:31:07,889 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:31:07,889 - lightrag - INFO - Processing 1 document(s)
+2025-05-19 23:31:07,889 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-19 23:31:07,889 - lightrag - INFO - Processing d-id: doc-86171bd4605e8f85300505ba6664126a
+2025-05-19 23:31:07,893 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:31:07,893 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:31:11,054 - lightrag - INFO -  == LLM cache == saving default: c132dba16fc189987aa3082d3aa56ef9
+2025-05-19 23:31:11,913 - lightrag - INFO -  == LLM cache == saving default: ae380b59d876834c80c9d01781a05d1e
+2025-05-19 23:31:11,914 - lightrag - INFO - Chunk 1 of 1 extracted 3 Ent + 0 Rel
+2025-05-19 23:31:11,914 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-19 23:31:11,914 - lightrag - INFO - Merge N: Artificial Intelligence (AI) | 1+1
+2025-05-19 23:31:11,914 - lightrag - INFO - Merge N: Machine Learning (ML) | 1+1
+2025-05-19 23:31:11,914 - lightrag - INFO - Merge N: Deep Learning | 1+1
+2025-05-19 23:31:11,915 - lightrag - INFO - Updating 3 entities  1/1: unknown_source
+2025-05-19 23:31:12,017 - lightrag - INFO - Updating 0 relations 1/1: unknown_source
+2025-05-19 23:31:12,025 - lightrag - INFO - Writing graph with 4 nodes, 4 edges
+2025-05-19 23:31:12,027 - lightrag - INFO - In memory DB persist to disk
+2025-05-19 23:31:12,027 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-19 23:31:12,028 - lightrag - INFO - Document processing pipeline completed
+2025-05-19 23:31:12,028 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:33:24,478 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:33:24,491 - lightrag - INFO - Process 63499 KV load full_docs with 2 records
+2025-05-19 23:33:24,491 - lightrag - INFO - Process 63499 KV load text_chunks with 2 records
+2025-05-19 23:33:24,492 - lightrag - INFO - Process 63499 KV load llm_response_cache with 6 records
+2025-05-19 23:33:24,493 - lightrag - INFO - Process 63499 doc status load doc_status with 2 records
+2025-05-19 23:33:24,493 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:33:24,493 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:33:24,493 - lightrag - INFO - No documents to process
+2025-05-19 23:33:24,495 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:33:25,837 - lightrag - ERROR - limit_async: Error in decorated function: 404 models/gemini-2.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+2025-05-19 23:33:25,877 - lightrag - INFO - Creating a new event loop in main thread.
+2025-05-19 23:38:59,352 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:38:59,365 - lightrag - INFO - Process 64216 KV load full_docs with 2 records
+2025-05-19 23:38:59,366 - lightrag - INFO - Process 64216 KV load text_chunks with 2 records
+2025-05-19 23:38:59,367 - lightrag - INFO - Process 64216 KV load llm_response_cache with 6 records
+2025-05-19 23:38:59,368 - lightrag - INFO - Process 64216 doc status load doc_status with 2 records
+2025-05-19 23:38:59,369 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:38:59,369 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:38:59,369 - lightrag - INFO - No documents to process
+2025-05-19 23:38:59,370 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:39:00,520 - lightrag - INFO -  == LLM cache == saving mix: 7e816a26bb43380d1a4e0c1c81edbaf4
+2025-05-19 23:39:00,520 - lightrag - INFO - Process 64216 building query context...
+2025-05-19 23:39:00,520 - lightrag - INFO - Query nodes: Algorithms, Neural Networks, Data Analysis, Pattern Recognition, Supervised Learning, Unsupervised Learning, top_k: 60, cosine: 0.2
+2025-05-19 23:39:00,520 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:39:01,117 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-19 23:39:01,118 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Artificial Intelligence, top_k: 60, cosine: 0.2
+2025-05-19 23:39:01,138 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-19 23:39:01,165 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-19 23:39:09,541 - lightrag - INFO -  == LLM cache == saving mix: b5ca6e52b14a9996114d409485023595
+2025-05-19 23:39:09,553 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:39:09,633 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,635 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,635 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,636 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,636 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,636 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,637 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,637 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,638 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,638 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,639 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,639 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,639 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,640 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,640 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:39:09,640 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:40:07,221 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:40:07,238 - lightrag - INFO - Process 64350 KV load full_docs with 2 records
+2025-05-19 23:40:07,239 - lightrag - INFO - Process 64350 KV load text_chunks with 2 records
+2025-05-19 23:40:07,240 - lightrag - INFO - Process 64350 KV load llm_response_cache with 8 records
+2025-05-19 23:40:07,240 - lightrag - INFO - Process 64350 doc status load doc_status with 2 records
+2025-05-19 23:40:07,241 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:40:07,242 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:40:07,242 - lightrag - INFO - No documents to process
+2025-05-19 23:40:07,243 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:41:00,195 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:41:00,209 - lightrag - INFO - Process 64476 KV load full_docs with 2 records
+2025-05-19 23:41:00,210 - lightrag - INFO - Process 64476 KV load text_chunks with 2 records
+2025-05-19 23:41:00,210 - lightrag - INFO - Process 64476 KV load llm_response_cache with 8 records
+2025-05-19 23:41:00,211 - lightrag - INFO - Process 64476 doc status load doc_status with 2 records
+2025-05-19 23:41:00,212 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:41:00,212 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:41:00,212 - lightrag - INFO - No documents to process
+2025-05-19 23:41:00,213 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:41:01,460 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:41:01,461 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:41:01,461 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:41:01,492 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:41:01,493 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:41:01,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:10,367 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:43:10,382 - lightrag - INFO - Process 64727 KV load full_docs with 2 records
+2025-05-19 23:43:10,383 - lightrag - INFO - Process 64727 KV load text_chunks with 2 records
+2025-05-19 23:43:10,384 - lightrag - INFO - Process 64727 KV load llm_response_cache with 8 records
+2025-05-19 23:43:10,384 - lightrag - INFO - Process 64727 doc status load doc_status with 2 records
+2025-05-19 23:43:10,385 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:43:10,385 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:43:10,385 - lightrag - INFO - No documents to process
+2025-05-19 23:43:10,386 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:43:15,747 - lightrag - INFO - Process 64727 building query context...
+2025-05-19 23:43:15,747 - lightrag - INFO - Query nodes: Algorithms, Neural Networks, Architectures, Data requirements, Feature extraction, top_k: 60, cosine: 0.2
+2025-05-19 23:43:15,748 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:43:16,019 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-19 23:43:16,019 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, top_k: 60, cosine: 0.2
+2025-05-19 23:43:16,038 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-19 23:43:16,055 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-19 23:43:29,336 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:43:29,364 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,366 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,367 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,367 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,367 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,367 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,368 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,368 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,368 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,368 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,368 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,369 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,369 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,369 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,369 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:43:29,371 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:47:23,269 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:47:23,283 - lightrag - INFO - Process 65176 KV load full_docs with 2 records
+2025-05-19 23:47:23,283 - lightrag - INFO - Process 65176 KV load text_chunks with 2 records
+2025-05-19 23:47:23,284 - lightrag - INFO - Process 65176 KV load llm_response_cache with 8 records
+2025-05-19 23:47:23,284 - lightrag - INFO - Process 65176 doc status load doc_status with 2 records
+2025-05-19 23:47:23,285 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:47:23,286 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:47:23,286 - lightrag - INFO - No documents to process
+2025-05-19 23:47:23,287 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:47:23,288 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:47:23,288 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:47:23,288 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:47:23,314 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:47:23,316 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:47:23,316 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:47:23,317 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:48:17,666 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:48:17,679 - lightrag - INFO - Process 65307 KV load full_docs with 2 records
+2025-05-19 23:48:17,679 - lightrag - INFO - Process 65307 KV load text_chunks with 2 records
+2025-05-19 23:48:17,680 - lightrag - INFO - Process 65307 KV load llm_response_cache with 8 records
+2025-05-19 23:48:17,681 - lightrag - INFO - Process 65307 doc status load doc_status with 2 records
+2025-05-19 23:48:17,681 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:48:17,681 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:48:17,681 - lightrag - INFO - No documents to process
+2025-05-19 23:48:17,682 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:48:17,683 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:48:17,683 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:48:17,683 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:48:17,704 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:48:17,705 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:48:17,706 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:48:17,706 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:49:13,090 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:49:13,106 - lightrag - INFO - Process 65421 KV load full_docs with 2 records
+2025-05-19 23:49:13,107 - lightrag - INFO - Process 65421 KV load text_chunks with 2 records
+2025-05-19 23:49:13,108 - lightrag - INFO - Process 65421 KV load llm_response_cache with 8 records
+2025-05-19 23:49:13,108 - lightrag - INFO - Process 65421 doc status load doc_status with 2 records
+2025-05-19 23:49:13,110 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:49:13,110 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:49:13,110 - lightrag - INFO - No documents to process
+2025-05-19 23:49:13,111 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:49:13,112 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:49:13,112 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:49:13,112 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:49:13,138 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:49:13,140 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:49:13,140 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:49:13,141 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:50:46,981 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:50:46,993 - lightrag - INFO - Process 65602 KV load full_docs with 2 records
+2025-05-19 23:50:46,994 - lightrag - INFO - Process 65602 KV load text_chunks with 2 records
+2025-05-19 23:50:46,995 - lightrag - INFO - Process 65602 KV load llm_response_cache with 8 records
+2025-05-19 23:50:46,995 - lightrag - INFO - Process 65602 doc status load doc_status with 2 records
+2025-05-19 23:50:46,996 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:50:46,996 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:50:46,996 - lightrag - INFO - No documents to process
+2025-05-19 23:50:46,997 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:50:46,998 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:50:46,998 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:50:46,998 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:50:47,030 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:50:47,032 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:50:47,032 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:50:47,033 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:53:10,864 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:53:10,878 - lightrag - INFO - Process 65946 KV load full_docs with 2 records
+2025-05-19 23:53:10,878 - lightrag - INFO - Process 65946 KV load text_chunks with 2 records
+2025-05-19 23:53:10,879 - lightrag - INFO - Process 65946 KV load llm_response_cache with 8 records
+2025-05-19 23:53:10,880 - lightrag - INFO - Process 65946 doc status load doc_status with 2 records
+2025-05-19 23:53:10,880 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:53:10,881 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:53:10,881 - lightrag - INFO - No documents to process
+2025-05-19 23:53:10,882 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:53:10,882 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:53:10,882 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:53:10,882 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:53:10,905 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:53:10,907 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:53:10,908 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:53:10,908 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:58:07,572 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:58:07,583 - lightrag - INFO - Process 66539 KV load full_docs with 2 records
+2025-05-19 23:58:07,584 - lightrag - INFO - Process 66539 KV load text_chunks with 2 records
+2025-05-19 23:58:07,584 - lightrag - INFO - Process 66539 KV load llm_response_cache with 8 records
+2025-05-19 23:58:07,585 - lightrag - INFO - Process 66539 doc status load doc_status with 2 records
+2025-05-19 23:58:07,585 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:58:07,586 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:58:07,586 - lightrag - INFO - No documents to process
+2025-05-19 23:58:07,587 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:58:07,587 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:58:07,587 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:58:07,588 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:58:07,615 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:58:07,617 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:58:07,617 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:58:07,618 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:58:50,531 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:58:50,544 - lightrag - INFO - Process 66611 KV load full_docs with 2 records
+2025-05-19 23:58:50,544 - lightrag - INFO - Process 66611 KV load text_chunks with 2 records
+2025-05-19 23:58:50,545 - lightrag - INFO - Process 66611 KV load llm_response_cache with 8 records
+2025-05-19 23:58:50,545 - lightrag - INFO - Process 66611 doc status load doc_status with 2 records
+2025-05-19 23:58:50,546 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:58:50,546 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:58:50,547 - lightrag - INFO - No documents to process
+2025-05-19 23:58:50,548 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:58:58,822 - lightrag - INFO - Process 66611 building query context...
+2025-05-19 23:58:58,822 - lightrag - INFO - Query nodes: Algorithms, Neural networks, Feature engineering, Data requirements, top_k: 60, cosine: 0.2
+2025-05-19 23:58:58,822 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-19 23:58:59,742 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-19 23:58:59,742 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, top_k: 60, cosine: 0.2
+2025-05-19 23:58:59,774 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-19 23:58:59,793 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-19 23:59:01,019 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:59:01,149 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,156 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,156 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,158 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,160 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,160 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,167 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,167 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,172 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,176 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,182 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,183 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,184 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,185 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,190 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:01,191 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:33,565 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-19 23:59:33,578 - lightrag - INFO - Process 66719 KV load full_docs with 2 records
+2025-05-19 23:59:33,579 - lightrag - INFO - Process 66719 KV load text_chunks with 2 records
+2025-05-19 23:59:33,580 - lightrag - INFO - Process 66719 KV load llm_response_cache with 8 records
+2025-05-19 23:59:33,580 - lightrag - INFO - Process 66719 doc status load doc_status with 2 records
+2025-05-19 23:59:33,581 - lightrag - INFO - No new unique documents were found.
+2025-05-19 23:59:33,581 - lightrag - INFO - Storage Initialization completed!
+2025-05-19 23:59:33,581 - lightrag - INFO - No documents to process
+2025-05-19 23:59:33,582 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-19 23:59:33,583 - lightrag - ERROR - No JSON-like structure found in the LLM respond.
+2025-05-19 23:59:33,583 - lightrag - WARNING - low_level_keywords and high_level_keywords is empty
+2025-05-19 23:59:33,583 - lightrag - INFO - Storage Finalization completed!
+2025-05-19 23:59:33,608 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:33,610 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:33,610 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-19 23:59:33,610 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:28,488 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:00:28,501 - lightrag - INFO - Process 66875 KV load full_docs with 2 records
+2025-05-20 00:00:28,501 - lightrag - INFO - Process 66875 KV load text_chunks with 2 records
+2025-05-20 00:00:28,502 - lightrag - INFO - Process 66875 KV load llm_response_cache with 8 records
+2025-05-20 00:00:28,502 - lightrag - INFO - Process 66875 doc status load doc_status with 2 records
+2025-05-20 00:00:28,504 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:00:28,504 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:00:28,504 - lightrag - INFO - No documents to process
+2025-05-20 00:00:28,506 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:00:40,034 - lightrag - INFO - Process 66875 building query context...
+2025-05-20 00:00:40,034 - lightrag - INFO - Query nodes: Differences, Neural Networks, Algorithms, Data, Features, Architecture, top_k: 60, cosine: 0.2
+2025-05-20 00:00:40,034 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 00:00:40,423 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-20 00:00:40,423 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, top_k: 60, cosine: 0.2
+2025-05-20 00:00:40,461 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-20 00:00:40,501 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-20 00:00:42,102 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 00:00:42,159 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,162 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,163 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,164 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,169 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,170 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,171 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,173 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,173 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,176 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,178 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,179 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,179 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,181 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,183 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:00:42,184 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:01:19,215 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:01:19,228 - lightrag - INFO - Process 67007 KV load full_docs with 2 records
+2025-05-20 00:01:19,228 - lightrag - INFO - Process 67007 KV load text_chunks with 2 records
+2025-05-20 00:01:19,229 - lightrag - INFO - Process 67007 KV load llm_response_cache with 8 records
+2025-05-20 00:01:19,229 - lightrag - INFO - Process 67007 doc status load doc_status with 2 records
+2025-05-20 00:01:19,230 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:01:19,230 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:01:19,230 - lightrag - INFO - No documents to process
+2025-05-20 00:01:19,231 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:01:19,231 - lightrag - ERROR - limit_async: Error in decorated function: name 'logger' is not defined
+2025-05-20 00:01:19,254 - lightrag - INFO - Creating a new event loop in main thread.
+2025-05-20 00:01:19,255 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:01:19,257 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:01:19,257 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:01:19,257 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:12,816 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:02:12,828 - lightrag - INFO - Process 67117 KV load full_docs with 2 records
+2025-05-20 00:02:12,829 - lightrag - INFO - Process 67117 KV load text_chunks with 2 records
+2025-05-20 00:02:12,829 - lightrag - INFO - Process 67117 KV load llm_response_cache with 8 records
+2025-05-20 00:02:12,830 - lightrag - INFO - Process 67117 doc status load doc_status with 2 records
+2025-05-20 00:02:12,831 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:02:12,831 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:02:12,831 - lightrag - INFO - No documents to process
+2025-05-20 00:02:12,832 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:02:24,895 - lightrag - INFO - Process 67117 building query context...
+2025-05-20 00:02:24,895 - lightrag - INFO - Query nodes: Main differences, top_k: 60, cosine: 0.2
+2025-05-20 00:02:24,895 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 00:02:25,027 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-20 00:02:25,027 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, top_k: 60, cosine: 0.2
+2025-05-20 00:02:25,046 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-20 00:02:25,067 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-20 00:02:26,451 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 00:02:26,492 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,494 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,495 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,496 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,496 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,496 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,496 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,497 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,497 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,497 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,497 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:02:26,498 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:07:24,133 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:07:24,168 - lightrag - INFO - Process 67733 KV load full_docs with 2 records
+2025-05-20 00:07:24,170 - lightrag - INFO - Process 67733 KV load text_chunks with 2 records
+2025-05-20 00:07:24,171 - lightrag - INFO - Process 67733 KV load llm_response_cache with 8 records
+2025-05-20 00:07:24,171 - lightrag - INFO - Process 67733 doc status load doc_status with 2 records
+2025-05-20 00:07:24,174 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:07:24,175 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:07:24,175 - lightrag - INFO - No documents to process
+2025-05-20 00:07:24,180 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:09:19,112 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:09:19,123 - lightrag - INFO - Process 67982 KV load full_docs with 2 records
+2025-05-20 00:09:19,124 - lightrag - INFO - Process 67982 KV load text_chunks with 2 records
+2025-05-20 00:09:19,125 - lightrag - INFO - Process 67982 KV load llm_response_cache with 8 records
+2025-05-20 00:09:19,126 - lightrag - INFO - Process 67982 doc status load doc_status with 2 records
+2025-05-20 00:09:19,126 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:09:19,126 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:09:19,127 - lightrag - INFO - No documents to process
+2025-05-20 00:09:19,128 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:09:22,484 - lightrag - INFO - Process 67982 building query context...
+2025-05-20 00:09:22,484 - lightrag - INFO - Query nodes: Algorithms, Neural Networks, Feature Engineering, Data Requirements, Architecture, top_k: 60, cosine: 0.2
+2025-05-20 00:09:22,484 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 00:09:22,998 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-20 00:09:22,998 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, Comparison, top_k: 60, cosine: 0.2
+2025-05-20 00:09:23,017 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-20 00:09:23,036 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-20 00:09:29,554 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 00:09:29,599 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,601 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,601 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,602 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,602 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,602 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,602 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,603 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,603 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,603 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,603 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,603 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,604 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,604 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,604 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:09:29,605 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:43,828 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:15:43,843 - lightrag - INFO - Process 68756 KV load full_docs with 2 records
+2025-05-20 00:15:43,843 - lightrag - INFO - Process 68756 KV load text_chunks with 2 records
+2025-05-20 00:15:43,844 - lightrag - INFO - Process 68756 KV load llm_response_cache with 8 records
+2025-05-20 00:15:43,844 - lightrag - INFO - Process 68756 doc status load doc_status with 2 records
+2025-05-20 00:15:43,845 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:15:43,845 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:15:43,846 - lightrag - INFO - No documents to process
+2025-05-20 00:15:43,847 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:15:47,562 - lightrag - INFO - Process 68756 building query context...
+2025-05-20 00:15:47,563 - lightrag - INFO - Query nodes: Algorithms, Neural Networks, Data, Feature Engineering, Architecture, top_k: 60, cosine: 0.2
+2025-05-20 00:15:47,563 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 00:15:48,539 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-20 00:15:48,539 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, Comparison, top_k: 60, cosine: 0.2
+2025-05-20 00:15:48,563 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-20 00:15:48,586 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-20 00:15:56,220 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 00:15:56,279 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,281 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,282 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,282 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,282 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,283 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,283 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,283 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,283 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,284 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,284 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,284 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,284 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,285 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,285 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:15:56,286 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:27:59,386 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 00:27:59,423 - lightrag - INFO - Process 70742 KV load full_docs with 2 records
+2025-05-20 00:27:59,423 - lightrag - INFO - Process 70742 KV load text_chunks with 2 records
+2025-05-20 00:27:59,425 - lightrag - INFO - Process 70742 KV load llm_response_cache with 8 records
+2025-05-20 00:27:59,425 - lightrag - INFO - Process 70742 doc status load doc_status with 2 records
+2025-05-20 00:27:59,426 - lightrag - INFO - No new unique documents were found.
+2025-05-20 00:27:59,427 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 00:27:59,427 - lightrag - INFO - No documents to process
+2025-05-20 00:27:59,429 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 00:28:03,456 - lightrag - INFO - Process 70742 building query context...
+2025-05-20 00:28:03,457 - lightrag - INFO - Query nodes: Algorithms, Neural Networks, Data requirements, Feature engineering, Architecture, top_k: 60, cosine: 0.2
+2025-05-20 00:28:03,457 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 00:28:04,375 - lightrag - INFO - Local query uses 4 entites, 4 relations, 2 chunks
+2025-05-20 00:28:04,375 - lightrag - INFO - Query edges: Machine Learning, Deep Learning, Differences, Comparison, top_k: 60, cosine: 0.2
+2025-05-20 00:28:04,408 - lightrag - INFO - Global query uses 4 entites, 4 relations, 1 chunks
+2025-05-20 00:28:04,441 - lightrag - INFO - Vector query: 2 chunks, top_k: 60
+2025-05-20 00:28:11,592 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 00:28:11,684 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,686 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,687 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,687 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,687 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,688 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,688 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,688 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,689 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,689 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,690 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,690 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,690 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,691 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,691 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,691 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,691 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,692 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,692 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 00:28:11,692 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:14:55,199 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 4 nodes, 4 edges
+2025-05-20 14:14:55,228 - lightrag - INFO - Process 21390 KV load full_docs with 2 records
+2025-05-20 14:14:55,229 - lightrag - INFO - Process 21390 KV load text_chunks with 2 records
+2025-05-20 14:14:55,229 - lightrag - INFO - Process 21390 KV load llm_response_cache with 8 records
+2025-05-20 14:14:55,230 - lightrag - INFO - Process 21390 doc status load doc_status with 2 records
+2025-05-20 14:14:55,233 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:14:55,233 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:14:55,234 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:14:55,234 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:14:55,234 - lightrag - INFO - Processing d-id: doc-f41995c5fde461184dd1ef2d42fdeeeb
+2025-05-20 14:14:55,235 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:14:55,236 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:15:06,745 - lightrag - INFO -  == LLM cache == saving default: 016e2f5b03a2bfb3ba8176c4050c9d09
+2025-05-20 14:15:26,430 - lightrag - INFO -  == LLM cache == saving default: 05feb7f7a881b0a69f91c5fdca80775f
+2025-05-20 14:15:26,433 - lightrag - INFO - Chunk 1 of 1 extracted 14 Ent + 17 Rel
+2025-05-20 14:15:26,433 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:15:26,434 - lightrag - INFO - Updating 14 entities  1/1: unknown_source
+2025-05-20 14:15:26,870 - lightrag - INFO - Updating 17 relations 1/1: unknown_source
+2025-05-20 14:15:27,140 - lightrag - INFO - Writing graph with 18 nodes, 21 edges
+2025-05-20 14:15:27,143 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:15:27,144 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:15:27,144 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:15:27,144 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:15:27,145 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:15:27,145 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:15:27,145 - lightrag - INFO - Processing d-id: doc-4a3f0ba380dd81afb3e29c35d34e23b3
+2025-05-20 14:15:51,957 - lightrag - INFO -  == LLM cache == saving default: 980b149a4b31d7dc705f9ed274b69a73
+2025-05-20 14:16:16,778 - lightrag - INFO -  == LLM cache == saving default: d94704149bf7bece3bd51a251bddf5f6
+2025-05-20 14:16:16,782 - lightrag - INFO - Chunk 1 of 1 extracted 13 Ent + 19 Rel
+2025-05-20 14:16:16,784 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:16:16,784 - lightrag - INFO - Merge N: utils.py | 1+1
+2025-05-20 14:16:16,784 - lightrag - INFO - Updating 13 entities  1/1: unknown_source
+2025-05-20 14:16:17,185 - lightrag - INFO - Updating 19 relations 1/1: unknown_source
+2025-05-20 14:16:17,615 - lightrag - INFO - Writing graph with 30 nodes, 40 edges
+2025-05-20 14:16:17,635 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:16:17,636 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:16:17,637 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:16:17,638 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:16:17,638 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:16:17,639 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:16:17,639 - lightrag - INFO - Processing d-id: doc-40cb5ede76eff473a7cb9cb0a8bcfd64
+2025-05-20 14:16:25,209 - lightrag - INFO -  == LLM cache == saving default: 1923419c638241c057a8c3146c75c08e
+2025-05-20 14:16:45,022 - lightrag - INFO -  == LLM cache == saving default: def9a17c0f2893a2fc06fba57a8e849e
+2025-05-20 14:16:45,024 - lightrag - INFO - Chunk 1 of 1 extracted 11 Ent + 19 Rel
+2025-05-20 14:16:45,024 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:16:45,024 - lightrag - INFO - Merge N: Input Data | 1+1
+2025-05-20 14:16:45,025 - lightrag - INFO - Updating 11 entities  1/1: unknown_source
+2025-05-20 14:16:45,280 - lightrag - INFO - Updating 19 relations 1/1: unknown_source
+2025-05-20 14:16:45,549 - lightrag - INFO - Writing graph with 40 nodes, 59 edges
+2025-05-20 14:16:45,551 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:16:45,551 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:16:45,552 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:16:45,552 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:16:45,552 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:16:45,552 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:16:45,552 - lightrag - INFO - Processing d-id: doc-0835963f497b121b4d24954d1e6a8b97
+2025-05-20 14:16:50,052 - lightrag - INFO -  == LLM cache == saving default: feb71eb23484ac121eb5b2ebb574aec5
+2025-05-20 14:16:59,214 - lightrag - INFO -  == LLM cache == saving default: c147280561d7fc31d83a1fedac9caef2
+2025-05-20 14:16:59,215 - lightrag - INFO - Chunk 1 of 1 extracted 10 Ent + 10 Rel
+2025-05-20 14:16:59,216 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:16:59,216 - lightrag - INFO - Merge N: Sample Application | 1+1
+2025-05-20 14:16:59,216 - lightrag - INFO - Updating 10 entities  1/1: unknown_source
+2025-05-20 14:16:59,447 - lightrag - INFO - Updating 10 relations 1/1: unknown_source
+2025-05-20 14:16:59,585 - lightrag - INFO - Writing graph with 49 nodes, 69 edges
+2025-05-20 14:16:59,593 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:16:59,594 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:16:59,594 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:16:59,594 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:16:59,594 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:16:59,594 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:16:59,594 - lightrag - INFO - Processing d-id: doc-dfaa4a5ff4f14cd9e7bba41173c7678e
+2025-05-20 14:17:08,413 - lightrag - INFO -  == LLM cache == saving default: e7fc87a6815606f2bbc91214b6538b7e
+2025-05-20 14:17:32,713 - lightrag - INFO -  == LLM cache == saving default: 0d95cbca93f6c37adbee6d9b3141c1e4
+2025-05-20 14:17:32,715 - lightrag - INFO - Chunk 1 of 1 extracted 15 Ent + 30 Rel
+2025-05-20 14:17:32,717 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:17:32,717 - lightrag - INFO - Merge N: Input Data | 1+2
+2025-05-20 14:17:32,718 - lightrag - INFO - Merge N: Output Formatting | 1+1
+2025-05-20 14:17:32,719 - lightrag - INFO - Updating 15 entities  1/1: unknown_source
+2025-05-20 14:17:33,041 - lightrag - INFO - Updating 30 relations 1/1: unknown_source
+2025-05-20 14:17:33,708 - lightrag - INFO - Writing graph with 62 nodes, 99 edges
+2025-05-20 14:17:33,806 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:17:33,806 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:17:33,806 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:17:33,807 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:17:33,807 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:17:33,807 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:17:33,807 - lightrag - INFO - Processing d-id: doc-b1eecd77de1862e513df3ee79922510f
+2025-05-20 14:17:38,133 - lightrag - INFO -  == LLM cache == saving default: 5f405d25ab4659383b61b90cc4f4fe19
+2025-05-20 14:17:50,031 - lightrag - INFO -  == LLM cache == saving default: 4141d15dd41f5a0d9289caec02aff3f7
+2025-05-20 14:17:50,032 - lightrag - INFO - Chunk 1 of 1 extracted 5 Ent + 7 Rel
+2025-05-20 14:17:50,033 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:17:50,033 - lightrag - INFO - Merge N: main.py | 1+1
+2025-05-20 14:17:50,033 - lightrag - INFO - Merge N: Error Handling | 1+1
+2025-05-20 14:17:50,033 - lightrag - INFO - Merge E: Error Handling - main.py | 2+1
+2025-05-20 14:17:50,033 - lightrag - INFO - Updating 5 entities  1/1: unknown_source
+2025-05-20 14:17:50,207 - lightrag - INFO - Updating 6 relations 1/1: unknown_source
+2025-05-20 14:17:50,330 - lightrag - INFO - Writing graph with 65 nodes, 104 edges
+2025-05-20 14:17:50,338 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:17:50,338 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:17:50,339 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:17:50,339 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:17:50,339 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:17:50,339 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:17:50,339 - lightrag - INFO - Processing d-id: doc-6631b117d369a3419d64e578ab8e4b1b
+2025-05-20 14:17:58,321 - lightrag - INFO -  == LLM cache == saving default: 75bd5afe24bad254f30fee4e99a40892
+2025-05-20 14:18:18,344 - lightrag - INFO -  == LLM cache == saving default: 2f0d9038b5c83eaf59981a31ebe9f31e
+2025-05-20 14:18:18,347 - lightrag - INFO - Chunk 1 of 1 extracted 9 Ent + 8 Rel
+2025-05-20 14:18:18,347 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:18:18,348 - lightrag - INFO - Merge N: main.py | 1+2
+2025-05-20 14:18:18,348 - lightrag - INFO - Merge N: Input Data | 1+3
+2025-05-20 14:18:18,348 - lightrag - INFO - Updating 9 entities  1/1: unknown_source
+2025-05-20 14:18:18,774 - lightrag - INFO - Updating 8 relations 1/1: unknown_source
+2025-05-20 14:18:18,943 - lightrag - INFO - Writing graph with 72 nodes, 112 edges
+2025-05-20 14:18:18,952 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:18:18,953 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:18:18,953 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:18:24,091 - lightrag - INFO - Process 21390 building query context...
+2025-05-20 14:18:24,091 - lightrag - INFO - Query nodes: Codebase, Functionality, Main functionality, Code, top_k: 60, cosine: 0.2
+2025-05-20 14:18:24,177 - lightrag - INFO - Local query uses 60 entites, 112 relations, 9 chunks
+2025-05-20 14:18:24,178 - lightrag - INFO - Query edges: Codebase understanding, Functionality overview, Software explanation, top_k: 60, cosine: 0.2
+2025-05-20 14:18:24,198 - lightrag - INFO - Global query uses 50 entites, 60 relations, 7 chunks
+2025-05-20 14:18:24,224 - lightrag - INFO - Vector query: 9 chunks, top_k: 60
+2025-05-20 14:18:36,908 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:18:36,957 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,959 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,960 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,960 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,960 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,960 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,961 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,961 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,961 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,961 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,962 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,962 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,963 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,963 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,963 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,963 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,964 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,964 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,964 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:18:36,964 - lightrag - ERROR - limit_async: Critical error in worker: Event loop is closed
+2025-05-20 14:19:08,318 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 72 nodes, 112 edges
+2025-05-20 14:19:08,336 - lightrag - INFO - Process 21934 KV load full_docs with 9 records
+2025-05-20 14:19:08,336 - lightrag - INFO - Process 21934 KV load text_chunks with 9 records
+2025-05-20 14:19:08,338 - lightrag - INFO - Process 21934 KV load llm_response_cache with 22 records
+2025-05-20 14:19:08,338 - lightrag - INFO - Process 21934 doc status load doc_status with 9 records
+2025-05-20 14:19:08,341 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,342 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:19:08,342 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,342 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,342 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,342 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,342 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,342 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,343 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,343 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,343 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,343 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,343 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,343 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:19:08,343 - lightrag - INFO - No documents to process
+2025-05-20 14:19:08,344 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:19:20,867 - lightrag - INFO - Process 21934 building query context...
+2025-05-20 14:19:20,869 - lightrag - INFO - Query nodes: Codebase, Main functionality, Purpose, top_k: 60, cosine: 0.2
+2025-05-20 14:19:20,869 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:19:21,033 - lightrag - INFO - Local query uses 60 entites, 112 relations, 9 chunks
+2025-05-20 14:19:21,034 - lightrag - INFO - Query edges: Code explanation, Functionality overview, top_k: 60, cosine: 0.2
+2025-05-20 14:19:21,065 - lightrag - INFO - Global query uses 49 entites, 60 relations, 7 chunks
+2025-05-20 14:19:21,085 - lightrag - INFO - Vector query: 9 chunks, top_k: 60
+2025-05-20 14:19:32,399 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:27:26,806 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 72 nodes, 112 edges
+2025-05-20 14:27:26,822 - lightrag - INFO - Process 23041 KV load full_docs with 9 records
+2025-05-20 14:27:26,822 - lightrag - INFO - Process 23041 KV load text_chunks with 9 records
+2025-05-20 14:27:26,823 - lightrag - INFO - Process 23041 KV load llm_response_cache with 22 records
+2025-05-20 14:27:26,824 - lightrag - INFO - Process 23041 doc status load doc_status with 9 records
+2025-05-20 14:27:27,131 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,132 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:27:27,132 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,132 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,132 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,132 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,132 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,132 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,132 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,132 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,133 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,133 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,133 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,133 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:27:27,133 - lightrag - INFO - No documents to process
+2025-05-20 14:27:27,134 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:27:30,600 - lightrag - INFO - Process 23041 building query context...
+2025-05-20 14:27:30,600 - lightrag - INFO - Query nodes: Codebase, Main purpose, Core features, top_k: 60, cosine: 0.2
+2025-05-20 14:27:30,600 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:27:31,713 - lightrag - INFO - Local query uses 60 entites, 112 relations, 9 chunks
+2025-05-20 14:27:31,713 - lightrag - INFO - Query edges: Code functionality, Code explanation, Code analysis, top_k: 60, cosine: 0.2
+2025-05-20 14:27:31,739 - lightrag - INFO - Global query uses 52 entites, 60 relations, 7 chunks
+2025-05-20 14:27:31,841 - lightrag - INFO - Vector query: 9 chunks, top_k: 60
+2025-05-20 14:27:39,463 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:28:03,639 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 72 nodes, 112 edges
+2025-05-20 14:28:03,657 - lightrag - INFO - Process 23123 KV load full_docs with 9 records
+2025-05-20 14:28:03,657 - lightrag - INFO - Process 23123 KV load text_chunks with 9 records
+2025-05-20 14:28:03,658 - lightrag - INFO - Process 23123 KV load llm_response_cache with 22 records
+2025-05-20 14:28:03,659 - lightrag - INFO - Process 23123 doc status load doc_status with 9 records
+2025-05-20 14:28:03,663 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:28:03,664 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:28:03,664 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:28:03,664 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:28:03,664 - lightrag - INFO - Processing d-id: doc-3f29c609771567eab05cac130cff3dd7
+2025-05-20 14:28:03,665 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:28:03,665 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:28:08,419 - lightrag - INFO -  == LLM cache == saving default: a9906d08b43fdba8319ff56d94e27f16
+2025-05-20 14:28:18,947 - lightrag - INFO -  == LLM cache == saving default: 8ad615695712a64f42e4de2499093792
+2025-05-20 14:28:18,947 - lightrag - INFO - Chunk 1 of 1 extracted 6 Ent + 5 Rel
+2025-05-20 14:28:18,951 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:28:18,951 - lightrag - INFO - Merge N: Sample Application | 1+2
+2025-05-20 14:28:18,951 - lightrag - INFO - Merge N: Python | 1+1
+2025-05-20 14:28:18,951 - lightrag - INFO - Merge N: Data Processing | 1+1
+2025-05-20 14:28:18,952 - lightrag - INFO - Merge E: Python - Sample Application | 1+1
+2025-05-20 14:28:18,952 - lightrag - INFO - Updating 6 entities  1/1: unknown_source
+2025-05-20 14:28:19,206 - lightrag - INFO - Updating 5 relations 1/1: unknown_source
+2025-05-20 14:28:19,336 - lightrag - INFO - Writing graph with 75 nodes, 116 edges
+2025-05-20 14:28:19,887 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:28:19,887 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:28:19,888 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:28:19,890 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,894 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,894 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,897 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,897 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,898 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,899 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,903 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,903 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,907 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,907 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,908 - lightrag - INFO - No documents to process
+2025-05-20 14:28:19,908 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:28:19,940 - lightrag - INFO - No documents to process
+2025-05-20 14:28:24,960 - lightrag - INFO - Process 23123 building query context...
+2025-05-20 14:28:24,961 - lightrag - INFO - Query nodes: Code, Software, System, Purpose, Role, top_k: 60, cosine: 0.2
+2025-05-20 14:28:25,227 - lightrag - INFO - Local query uses 60 entites, 114 relations, 10 chunks
+2025-05-20 14:28:25,227 - lightrag - INFO - Query edges: Codebase, Functionality, Explanation, top_k: 60, cosine: 0.2
+2025-05-20 14:28:25,323 - lightrag - INFO - Global query uses 50 entites, 60 relations, 8 chunks
+2025-05-20 14:28:25,363 - lightrag - INFO - Vector query: 10 chunks, top_k: 60
+2025-05-20 14:28:37,644 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:28:59,963 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 75 nodes, 116 edges
+2025-05-20 14:28:59,981 - lightrag - INFO - Process 23301 KV load full_docs with 10 records
+2025-05-20 14:28:59,981 - lightrag - INFO - Process 23301 KV load text_chunks with 10 records
+2025-05-20 14:28:59,983 - lightrag - INFO - Process 23301 KV load llm_response_cache with 24 records
+2025-05-20 14:28:59,983 - lightrag - INFO - Process 23301 doc status load doc_status with 10 records
+2025-05-20 14:28:59,988 - lightrag - INFO - Stored 1 new unique documents
+2025-05-20 14:28:59,988 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:28:59,989 - lightrag - INFO - Processing 1 document(s)
+2025-05-20 14:28:59,989 - lightrag - INFO - Extracting stage 1/1: unknown_source
+2025-05-20 14:28:59,989 - lightrag - INFO - Processing d-id: doc-2bccdefbf0a3da65b0f04da4bf703b88
+2025-05-20 14:28:59,990 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:28:59,990 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:29:08,607 - lightrag - INFO -  == LLM cache == saving default: 3c5027ccefc96ac47740da0925ff6584
+2025-05-20 14:29:34,919 - lightrag - INFO -  == LLM cache == saving default: c9986f2004ba559ffcaebb9e210d9b92
+2025-05-20 14:29:34,929 - lightrag - INFO - Chunk 1 of 1 extracted 24 Ent + 26 Rel
+2025-05-20 14:29:34,933 - lightrag - INFO - Merging stage 1/1: unknown_source
+2025-05-20 14:29:34,935 - lightrag - INFO - Updating 24 entities  1/1: unknown_source
+2025-05-20 14:29:35,552 - lightrag - INFO - Updating 26 relations 1/1: unknown_source
+2025-05-20 14:29:36,074 - lightrag - INFO - Writing graph with 99 nodes, 142 edges
+2025-05-20 14:29:36,131 - lightrag - INFO - In memory DB persist to disk
+2025-05-20 14:29:36,133 - lightrag - INFO - Completed processing file 1/1: unknown_source
+2025-05-20 14:29:36,134 - lightrag - INFO - Document processing pipeline completed
+2025-05-20 14:29:36,135 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,137 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,137 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,139 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,139 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,140 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,140 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,141 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,141 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,142 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,142 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,145 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,146 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,148 - lightrag - INFO - No documents to process
+2025-05-20 14:29:36,149 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:29:36,149 - lightrag - INFO - No documents to process
+2025-05-20 14:29:43,109 - lightrag - INFO - Process 23301 building query context...
+2025-05-20 14:29:43,109 - lightrag - INFO - Query nodes: Functionality, Codebase, Main functionality, top_k: 60, cosine: 0.2
+2025-05-20 14:29:43,296 - lightrag - INFO - Local query uses 60 entites, 107 relations, 9 chunks
+2025-05-20 14:29:43,296 - lightrag - INFO - Query edges: Codebase Explanation, Software Functionality, top_k: 60, cosine: 0.2
+2025-05-20 14:29:43,335 - lightrag - INFO - Global query uses 55 entites, 60 relations, 8 chunks
+2025-05-20 14:29:43,358 - lightrag - INFO - Vector query: 11 chunks, top_k: 60
+2025-05-20 14:29:53,513 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:41:14,292 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 99 nodes, 142 edges
+2025-05-20 14:41:14,311 - lightrag - INFO - Process 25567 KV load full_docs with 11 records
+2025-05-20 14:41:14,311 - lightrag - INFO - Process 25567 KV load text_chunks with 11 records
+2025-05-20 14:41:14,313 - lightrag - INFO - Process 25567 KV load llm_response_cache with 26 records
+2025-05-20 14:41:14,313 - lightrag - INFO - Process 25567 doc status load doc_status with 11 records
+2025-05-20 14:41:14,318 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,318 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:41:14,318 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,318 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,319 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,319 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,319 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,319 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,319 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,319 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,319 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,319 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,320 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,320 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,320 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,320 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,320 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,320 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:41:14,320 - lightrag - INFO - No documents to process
+2025-05-20 14:41:14,322 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:41:17,078 - lightrag - INFO - Process 25567 building query context...
+2025-05-20 14:41:17,078 - lightrag - INFO - Query nodes: Syntax, Return statement, Function definition, Value, top_k: 60, cosine: 0.2
+2025-05-20 14:41:17,078 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:41:17,799 - lightrag - INFO - Local query uses 60 entites, 119 relations, 9 chunks
+2025-05-20 14:41:17,799 - lightrag - INFO - Query edges: Structure, Return function, Programming concept, top_k: 60, cosine: 0.2
+2025-05-20 14:41:17,824 - lightrag - INFO - Global query uses 53 entites, 60 relations, 8 chunks
+2025-05-20 14:41:17,842 - lightrag - INFO - Vector query: 11 chunks, top_k: 60
+2025-05-20 14:41:23,324 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:42:17,841 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 99 nodes, 142 edges
+2025-05-20 14:42:17,858 - lightrag - INFO - Process 25675 KV load full_docs with 11 records
+2025-05-20 14:42:17,858 - lightrag - INFO - Process 25675 KV load text_chunks with 11 records
+2025-05-20 14:42:17,860 - lightrag - INFO - Process 25675 KV load llm_response_cache with 26 records
+2025-05-20 14:42:17,860 - lightrag - INFO - Process 25675 doc status load doc_status with 11 records
+2025-05-20 14:42:17,864 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,864 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:42:17,864 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,864 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,864 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,864 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,864 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,865 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,865 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,865 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,865 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,865 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,865 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,865 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,865 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,865 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,865 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,866 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:42:17,866 - lightrag - INFO - No documents to process
+2025-05-20 14:42:17,867 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:42:20,026 - lightrag - INFO - Process 25675 building query context...
+2025-05-20 14:42:20,026 - lightrag - INFO - Query nodes: process data, structure, top_k: 60, cosine: 0.2
+2025-05-20 14:42:20,026 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:42:20,206 - lightrag - INFO - Local query uses 60 entites, 113 relations, 11 chunks
+2025-05-20 14:42:20,206 - lightrag - INFO - Query edges: Function structure, Return value, Data processing, top_k: 60, cosine: 0.2
+2025-05-20 14:42:20,240 - lightrag - INFO - Global query uses 54 entites, 60 relations, 9 chunks
+2025-05-20 14:42:20,258 - lightrag - INFO - Vector query: 11 chunks, top_k: 60
+2025-05-20 14:42:25,651 - lightrag - INFO - Storage Finalization completed!
+2025-05-20 14:44:11,201 - lightrag - INFO - Loaded graph from ./rag_storage/graph_chunk_entity_relation.graphml with 99 nodes, 142 edges
+2025-05-20 14:44:11,221 - lightrag - INFO - Process 25864 KV load full_docs with 11 records
+2025-05-20 14:44:11,221 - lightrag - INFO - Process 25864 KV load text_chunks with 11 records
+2025-05-20 14:44:11,223 - lightrag - INFO - Process 25864 KV load llm_response_cache with 26 records
+2025-05-20 14:44:11,224 - lightrag - INFO - Process 25864 doc status load doc_status with 11 records
+2025-05-20 14:44:11,228 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,228 - lightrag - INFO - Storage Initialization completed!
+2025-05-20 14:44:11,228 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,228 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,228 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,228 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,229 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,229 - lightrag - INFO - No new unique documents were found.
+2025-05-20 14:44:11,230 - lightrag - INFO - No documents to process
+2025-05-20 14:44:11,231 - lightrag - INFO - limit_async: 4 new workers initialized
+2025-05-20 14:44:14,137 - lightrag - INFO - Process 25864 building query context...
+2025-05-20 14:44:14,137 - lightrag - INFO - Query nodes: configs, top_k: 60, cosine: 0.2
+2025-05-20 14:44:14,137 - lightrag - INFO - limit_async: 16 new workers initialized
+2025-05-20 14:44:14,248 - lightrag - INFO - Local query uses 60 entites, 105 relations, 10 chunks
+2025-05-20 14:44:14,248 - lightrag - INFO - Query edges: Configuration files, Purpose, Usage, top_k: 60, cosine: 0.2
+2025-05-20 14:44:14,270 - lightrag - INFO - Global query uses 57 entites, 60 relations, 9 chunks
+2025-05-20 14:44:14,291 - lightrag - INFO - Vector query: 11 chunks, top_k: 60
+2025-05-20 14:44:20,957 - lightrag - INFO - Storage Finalization completed!

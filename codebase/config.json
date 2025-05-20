@@ -1,0 +1,25 @@
+{
+  "application": {
+    "name": "Sample Text Processor",
+    "version": "1.0.0",
+    "description": "A simple text processing application"
+  },
+  "settings": {
+    "max_file_size": 10485760,
+    "supported_formats": ["txt", "csv", "md", "json"],
+    "output_format": "text",
+    "debug_mode": false
+  },
+  "processing": {
+    "chunk_size": 4096,
+    "max_threads": 4,
+    "timeout_seconds": 30
+  },
+  "logging": {
+    "enabled": true,
+    "level": "info",
+    "file": "app.log",
+    "max_size_mb": 10,
+    "backup_count": 3
+  }
+}
