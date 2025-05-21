@@ -21,6 +21,8 @@ from langchain_community.document_loaders import (
     CSVLoader,
     UnstructuredMarkdownLoader,
 )
+from langchain_community.document_loaders.generic import GenericLoader
+from langchain_community.document_loaders.parsers import LanguageParser
 from langchain_text_splitters import (
     RecursiveCharacterTextSplitter,
     PythonCodeTextSplitter,
@@ -58,6 +60,10 @@ DEFAULT_IGNORE_PATTERNS = [
     "**/*.bin",
 ]
 
+#######################
+# Embedding Functions #
+#######################
+
 async def ollama_embed(
     texts: List[str],
     model: str = "nomic-embed-text",
@@ -90,7 +96,10 @@ async def ollama_embed(
 # Add embedding dimension attribute
 ollama_embed.embedding_dim = 768  # Standard dimension for nomic-embed-text
 
-# Gemini LLM Function
+###################
+# LLM Integration #
+###################
+
 async def llm_model_func(
     prompt, system_prompt=None, history_messages=[], keyword_extraction=False, **kwargs
 ) -> str:
@@ -104,6 +113,9 @@ async def llm_model_func(
         **kwargs
     )
 
+#########################
+# File Helper Functions #
+#########################
 
 def should_ignore_path(path: str, ignore_patterns: List[str]) -> bool:
     """Check if a file path should be ignored based on patterns."""
@@ -133,7 +145,7 @@ def get_file_loader(file_path: str) -> Optional[Any]:
         
         # Handle Markdown files
         elif file_ext == ".md":
-            # Use TextLoader for Markdown files to avoid unstructured dependency issues
+            # Use TextLoader for Markdown files to avoid dependency issues
             # This is simpler but will treat Markdown as plain text
             return TextLoader(file_path)
         
@@ -153,6 +165,28 @@ def get_file_loader(file_path: str) -> Optional[Any]:
         except Exception:
             return None
 
+def get_language_parser(file_path: str) -> Any:
+    """Get the appropriate language parser for a file based on its extension."""
+    file_ext = os.path.splitext(file_path)[1].lower()
+    
+    # Define parser threshold for language-specific parsing
+    parser_threshold = 0  # Segments over 300 chars will be split by language-specific splitter
+    
+    # Map file extensions to their respective parsers
+    if file_ext == ".py":
+        return LanguageParser(
+            language=Language.PYTHON,
+            parser_threshold=parser_threshold
+        )
+    elif file_ext in [".js", ".jsx", ".ts", ".tsx"]:
+        return LanguageParser(
+            language=Language.JS if file_ext in [".js", ".jsx"] else Language.TS,
+            parser_threshold=parser_threshold
+        )
+    
+    # For other file types, return None to indicate they should be handled differently
+    return None
+
 def get_text_splitter(file_path: str) -> Any:
     """Get the appropriate text splitter for a file based on its extension."""
     file_ext = os.path.splitext(file_path)[1].lower()
@@ -163,7 +197,11 @@ def get_text_splitter(file_path: str) -> Any:
     
     # Map file extensions to their respective splitters
     if file_ext == ".py":
-        return PythonCodeTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        # Create Python-specific splitter
+        return PythonCodeTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap
+        )
     elif file_ext == ".md":
         return MarkdownTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     elif file_ext == ".json":
@@ -173,60 +211,163 @@ def get_text_splitter(file_path: str) -> Any:
     # Default recursive character splitter
     return RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 
-async def load_codebase_files(codebase_dir: str, ignore_patterns: List[str] = None) -> List[Tuple[str, List[str]]]:
-    """
-    Load and split files from the codebase directory.
+######################
+# Codebase Processing #
+######################
+
+async def process_code_files(file_paths: List[str], codebase_dir: str) -> List[Tuple[str, List[str]]]:
+    """Process code files using LanguageParser and return chunks for each file."""
+    file_chunks = []
     
-    Returns:
-        List of tuples containing (file_path, chunks)
-    """
+    # Group files by extension
+    files_by_ext = {}
+    for file_path in file_paths:
+        file_ext = os.path.splitext(file_path)[1].lower()
+        if file_ext not in files_by_ext:
+            files_by_ext[file_ext] = []
+        files_by_ext[file_ext].append(file_path)
+    
+    # Process files by extension
+    for file_ext, files in files_by_ext.items():
+        # Skip empty lists
+        if not files:
+            continue
+        
+        # Group files by directory for better logging
+        files_by_dir = {}
+        for file_path in files:
+            dir_path = os.path.dirname(file_path)
+            if dir_path not in files_by_dir:
+                files_by_dir[dir_path] = []
+            files_by_dir[dir_path].append(file_path)
+        
+        for dir_path, files in files_by_dir.items():
+            # Check if we have a language parser for this file type
+            parser = get_language_parser(files[0])
+            
+            if parser:
+                # Process code files with LanguageParser
+                # Use GenericLoader.from_filesystem for directory-based loading with parser
+                dir_path_abs = os.path.abspath(dir_path)
+                loader = GenericLoader.from_filesystem(
+                    dir_path_abs,
+                    glob="*",  # Match all files in directory
+                    suffixes=[file_ext],  # Only files with this extension
+                    parser=parser
+                )
+                
+                try:
+                    documents = loader.load()
+                    
+                    # Process each document and add metadata
+                    for doc in documents:
+                        file_path = doc.metadata.get('source')
+                        rel_path = os.path.relpath(file_path, codebase_dir)
+                        
+                        # Add metadata to the chunk content for better context
+                        content_type = doc.metadata.get('content_type', 'code')
+                        language = doc.metadata.get('language', file_ext[1:])
+                        
+                        # Create enhanced chunk with metadata
+                        enhanced_chunk = f"File: {rel_path}\nType: {content_type}\nLanguage: {language}\n\n{doc.page_content}"
+                        
+                        # Find or create the file entry in file_chunks
+                        file_entry = next(((path, chunks) for path, chunks in file_chunks if path == file_path), None)
+                        if file_entry:
+                            file_entry[1].append(enhanced_chunk)
+                        else:
+                            file_chunks.append((file_path, [enhanced_chunk]))
+                            
+                    print(f"Processed {len(documents)} chunks from {len(files)} {file_ext} files in {os.path.relpath(dir_path, codebase_dir)}")
+                except Exception as e:
+                    print(f"Error processing {file_ext} files in {os.path.relpath(dir_path, codebase_dir)}: {e}")
+            else:
+                # Process other file types individually using text splitters
+                for file_path in files:
+                    # Get appropriate loader for the file
+                    loader = get_file_loader(file_path)
+                    if not loader:
+                        continue
+                    
+                    # Load the document
+                    try:
+                        documents = loader.load()
+                        
+                        # Get appropriate text splitter
+                        text_splitter = get_text_splitter(file_path)
+                        
+                        # Split the document into chunks
+                        chunks = text_splitter.split_documents(documents)
+                        
+                        # Process each chunk
+                        enhanced_chunks = []
+                        for chunk in chunks:
+                            rel_path = os.path.relpath(file_path, codebase_dir)
+                            
+                            # Add metadata to the chunk content
+                            content_type = "text"
+                            language = file_ext[1:] if file_ext else "txt"
+                            
+                            # Create enhanced chunk with metadata
+                            enhanced_chunk = f"File: {rel_path}\nType: {content_type}\nLanguage: {language}\n\n{chunk.page_content}"
+                            enhanced_chunks.append(enhanced_chunk)
+                        
+                        if enhanced_chunks:
+                            file_chunks.append((file_path, enhanced_chunks))
+                            print(f"Processed {file_path}: {len(enhanced_chunks)} chunks")
+                    except Exception as e:
+                        print(f"Error processing {file_path}: {e}")
+    
+    return file_chunks
+
+async def process_codebase(ignore_patterns: List[str] = None) -> List[Tuple[str, List[str]]]:
+    """Process the codebase and return chunks for each file."""
     if ignore_patterns is None:
         ignore_patterns = DEFAULT_IGNORE_PATTERNS
     
-    # Get all files in the codebase directory
-    all_files = []
-    for root, _, files in os.walk(codebase_dir):
-        for file in files:
-            file_path = os.path.join(root, file)
-            all_files.append(file_path)
-    
-    # Filter out ignored files
-    files_to_process = [
-        file_path for file_path in all_files 
-        if not should_ignore_path(file_path, ignore_patterns)
-    ]
-    
     file_chunks = []
     
-    for file_path in files_to_process:
-        try:
-            # Get appropriate loader for the file
-            loader = get_file_loader(file_path)
-            if not loader:
-                continue
-            
-            # Load the document
-            documents = loader.load()
-            
-            # Get appropriate splitter for the file
-            splitter = get_text_splitter(file_path)
-            
-            # Split the document into chunks
-            chunks = splitter.split_documents(documents)
-            
-            # Extract text from chunks
-            text_chunks = [chunk.page_content for chunk in chunks]
-            
-            # Add relative path as prefix to each chunk for better context
-            rel_path = os.path.relpath(file_path, codebase_dir)
-            prefixed_chunks = [f"File: {rel_path}\n\n{chunk}" for chunk in text_chunks]
-            
-            file_chunks.append((file_path, prefixed_chunks))
-            print(f"Processed {rel_path}: {len(prefixed_chunks)} chunks")
-        except Exception as e:
-            print(f"Error processing {file_path}: {e}")
+    print(f"\n{'='*80}")
+    print(f"STARTING CODEBASE PROCESSING")
+    print(f"{'='*80}")
+    print(f"Codebase directory: {CODEBASE_DIR}")
+    print(f"Ignore patterns: {ignore_patterns}")
+    
+    try:
+        # Get all files in the codebase directory
+        all_files = []
+        for root, _, files in os.walk(CODEBASE_DIR):
+            for file in files:
+                file_path = os.path.join(root, file)
+                all_files.append(file_path)
+        
+        # Filter out ignored files
+        filtered_files = [
+            file_path for file_path in all_files
+            if not should_ignore_path(file_path, ignore_patterns)
+        ]
+        
+        print(f"Found {len(filtered_files)} files after filtering (from {len(all_files)} total files)")
+        
+        # Process code files
+        file_chunks = await process_code_files(filtered_files, CODEBASE_DIR)
+        
+        print(f"\n{'='*80}")
+        print(f"CODEBASE PROCESSING COMPLETE")
+        print(f"{'='*80}")
+        print(f"Total files processed: {len(file_chunks)}")
+        print(f"Total chunks created: {sum(len(chunks) for _, chunks in file_chunks)}")
+    
+    except Exception as e:
+        print(f"Error processing codebase: {e}")
+        import traceback
+        traceback.print_exc()
     
     return file_chunks
+
+#################
+# RAG Functions #
+#################
 
 async def initialize_rag():
     """Initialize the LightRAG instance with necessary configurations."""
@@ -248,6 +389,45 @@ async def initialize_rag():
     await initialize_pipeline_status()
     return rag
 
+async def insert_chunks_into_rag(rag: LightRAG, file_chunks: List[Tuple[str, List[str]]]) -> int:
+    """Insert chunks into RAG and return the number of chunks inserted."""
+    total_chunks = sum(len(chunks) for _, chunks in file_chunks)
+    print(f"\nInserting {total_chunks} chunks from {len(file_chunks)} files into RAG...")
+    
+    chunk_count = 0
+    for file_path, chunks in file_chunks:
+        rel_path = os.path.relpath(file_path, CODEBASE_DIR)
+        try:
+            for chunk in chunks:
+                await rag.ainsert(chunk)
+                chunk_count += 1
+                if chunk_count % 10 == 0:
+                    print(f"Inserted {chunk_count}/{total_chunks} chunks")
+        except Exception as e:
+            print(f"Error inserting chunks from {rel_path}: {e}")
+    
+    print(f"Successfully inserted {chunk_count} chunks.")
+    return chunk_count
+
+async def query_rag(rag: LightRAG, query: str) -> str:
+    """Query the RAG system and return the response."""
+    print(f"\nQuery: {query}")
+    
+    try:
+        response = await rag.aquery(
+            query,
+            param=QueryParam(mode="mix")
+        )
+        return response
+    except Exception as e:
+        error_msg = f"Error querying: {e}"
+        print(error_msg)
+        return error_msg
+
+####################
+# Main Application #
+####################
+
 async def main():
     """Main function to demonstrate LightRAG functionality with codebase loading."""
     rag = None
@@ -263,52 +443,29 @@ async def main():
         # Load custom ignore patterns if .lightragignore exists
         ignore_patterns = DEFAULT_IGNORE_PATTERNS.copy()
         lightragignore_path = os.path.join(CODEBASE_DIR, '.lightragignore')
+        
         if os.path.exists(lightragignore_path):
             with open(lightragignore_path, 'r') as f:
                 custom_patterns = [line.strip() for line in f if line.strip() and not line.startswith('#')]
                 ignore_patterns.extend(custom_patterns)
         
-        # Load and process files from codebase
-        print(f"\nLoading files from codebase directory: {CODEBASE_DIR}")
-        file_chunks = await load_codebase_files(CODEBASE_DIR, ignore_patterns)
+        # Process files from codebase
+        print(f"\nProcessing files from {CODEBASE_DIR}...")
+        file_chunks = await process_codebase(ignore_patterns=ignore_patterns)
         
         if not file_chunks:
             print("No files were loaded from the codebase directory.")
             return
         
         # Insert chunks into RAG
-        total_chunks = sum(len(chunks) for _, chunks in file_chunks)
-        print(f"\nInserting {total_chunks} chunks from {len(file_chunks)} files into RAG...")
-        
-        chunk_count = 0
-        for file_path, chunks in file_chunks:
-            rel_path = os.path.relpath(file_path, CODEBASE_DIR)
-            try:
-                for chunk in chunks:
-                    await rag.ainsert(chunk)
-                    chunk_count += 1
-                    if chunk_count % 10 == 0:
-                        print(f"Inserted {chunk_count}/{total_chunks} chunks")
-            except Exception as e:
-                print(f"Error inserting chunks from {rel_path}: {e}")
-        
-        print(f"Successfully inserted {chunk_count} chunks.")
+        await insert_chunks_into_rag(rag, file_chunks)
         
         # Perform a query
         # query = "Can you explain the main functionality of this codebase?"
-        query = "what are the configs using for?"
-        print(f"\nQuery: {query}")
-        
-        # Get response using hybrid search
-        try:
-            response = await rag.aquery(
-                query,
-                param=QueryParam(mode="mix")
-            )
-            print("\nResponse:")
-            print(response)
-        except Exception as e:
-            print(f"Error querying: {e}")
+        query = "what does this application do? And how it works?"
+        response = await query_rag(rag, query)
+        print("\nResponse:")
+        print(response)
         
     except Exception as e:
         print(f"An error occurred in main: {e}")
