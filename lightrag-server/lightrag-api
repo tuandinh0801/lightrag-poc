@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /Users/Shared/ssd/Work/lightrag-poc/lightrag-server/venv/bin/activate
+lightrag-server
