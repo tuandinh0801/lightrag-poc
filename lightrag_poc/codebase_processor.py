@@ -14,41 +14,43 @@ from langchain_community.document_loaders.parsers import LanguageParser
 from lightrag_poc.file_helpers import (
     should_ignore_path,
     get_file_loader,
-    get_language_parser
+    get_language_parser,
+    get_text_splitter
 )
+from lightrag_poc.file_mappings import LANGUAGE_TO_GLOB_PATTERNS
 
-async def process_codebase_by_directory(codebase_dir: str, ignore_patterns: List[str] = None) -> List[str]:
+
+CHUNKING_SETTINGS = {
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "apply_text_splitting": True
+}
+
+async def process_codebase_by_directory(codebase_dir: str, ignore_patterns: List[str] = None, chunk_size: int = 1000, chunk_overlap: int = 100, apply_text_splitting: bool = True) -> List[Dict[str, str]]:
     """
     Process the codebase by directory using DirectoryLoader approach for different file types.
     
     This function organizes file loading by file type and uses the appropriate loaders
     for each type, with special handling for code files that benefit from language parsing.
+    It can also apply text splitting to break down large chunks into smaller ones.
+    
+    Args:
+        codebase_dir: Directory containing the codebase
+        ignore_patterns: List of glob patterns to ignore
+        chunk_size: Size of each chunk in characters for text splitting
+        chunk_overlap: Overlap between chunks in characters for text splitting
+        apply_text_splitting: Whether to apply text splitting to large chunks
+        
+    Returns:
+        List of dictionaries containing 'content' and 'file_path' for each chunk
     """
     if ignore_patterns is None:
         ignore_patterns = []
     
-    all_chunks = []
+    all_chunks = []  # Will contain dictionaries with 'content' and 'file_path' keys
     
-    # Define file type groups for processing
-    file_groups = {
-        "python": ["**/*.py"],
-        "javascript": ["**/*.js", "**/*.jsx"],
-        "typescript": ["**/*.ts", "**/*.tsx"],
-        "java": ["**/*.java"],
-        "go": ["**/*.go"],
-        "ruby": ["**/*.rb"],
-        "php": ["**/*.php"],
-        "c": ["**/*.c", "**/*.h"],
-        "cpp": ["**/*.cpp", "**/*.hpp", "**/*.cc"],
-        "csharp": ["**/*.cs"],
-        "rust": ["**/*.rs"],
-        "markdown": ["**/*.md", "**/*.markdown"],
-        "json": ["**/*.json"],
-        "yaml": ["**/*.yaml", "**/*.yml"],
-        "text": ["**/*.txt"],
-        "csv": ["**/*.csv"],
-        "other": ["**/*.*"],  # Catch-all for other file types
-    }
+    # Use centralized file type groups for processing
+    file_groups = LANGUAGE_TO_GLOB_PATTERNS
     
     # Process each file group
     for language, glob_patterns in file_groups.items():
@@ -71,8 +73,31 @@ async def process_codebase_by_directory(codebase_dir: str, ignore_patterns: List
                         loader = get_file_loader(filepath)
                         if loader:
                             docs = loader.load()
-                            for doc in docs:
-                                all_chunks.append(doc.page_content)
+                            
+                            if apply_text_splitting:
+                                # Apply text splitting for large chunks
+                                splitter = get_text_splitter(filepath, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+                                if splitter and docs:
+                                    split_docs = splitter.split_documents(docs)
+                                    for doc in split_docs:
+                                        all_chunks.append({
+                                            'content': doc.page_content,
+                                            'file_path': filepath
+                                        })
+                                else:
+                                    # If no splitter available or splitting failed, use original docs
+                                    for doc in docs:
+                                        all_chunks.append({
+                                            'content': doc.page_content,
+                                            'file_path': filepath
+                                        })
+                            else:
+                                # No splitting, use original docs
+                                for doc in docs:
+                                    all_chunks.append({
+                                        'content': doc.page_content,
+                                        'file_path': filepath
+                                    })
                     except Exception as e:
                         print(f"Error loading {filepath}: {e}")
         else:
@@ -98,10 +123,37 @@ async def process_codebase_by_directory(codebase_dir: str, ignore_patterns: List
                                 
                                 if loader:
                                     docs = loader.load()
+                                    matching_docs = []
+                                    
+                                    # Filter docs to only include those matching our specific file
                                     for doc in docs:
-                                        # Only include if it matches our specific file
                                         if doc.metadata.get("source") == file_path:
-                                            all_chunks.append(doc.page_content)
+                                            matching_docs.append(doc)
+                                    
+                                    if apply_text_splitting and matching_docs:
+                                        # Apply text splitting for large chunks
+                                        splitter = get_text_splitter(file_path, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+                                        if splitter:
+                                            split_docs = splitter.split_documents(matching_docs)
+                                            for doc in split_docs:
+                                                all_chunks.append({
+                                                    'content': doc.page_content,
+                                                    'file_path': file_path
+                                                })
+                                        else:
+                                            # If no splitter available, use original docs
+                                            for doc in matching_docs:
+                                                all_chunks.append({
+                                                    'content': doc.page_content,
+                                                    'file_path': file_path
+                                                })
+                                    else:
+                                        # No splitting, use original docs
+                                        for doc in matching_docs:
+                                            all_chunks.append({
+                                                'content': doc.page_content,
+                                                'file_path': file_path
+                                            })
                                         
                             except Exception as e:
                                 print(f"Error loading {file_path} with language parser: {e}")
@@ -113,11 +165,17 @@ async def process_codebase_by_directory(codebase_dir: str, ignore_patterns: List
     print(f"Total chunks extracted: {len(all_chunks)}")
     return all_chunks
 
-async def process_codebase(ignore_patterns: List[str] = None) -> List[str]:
+async def process_codebase(ignore_patterns: List[str] = None) -> List[Dict[str, str]]:
     """
     Process the codebase and return chunks.
     This function is maintained for backward compatibility.
     It now uses the directory-based approach internally.
+    
+    Args:
+        ignore_patterns: List of glob patterns to ignore
+        
+    Returns:
+        List of dictionaries containing 'content' and 'file_path' for each chunk
     """
     from lightrag_poc.config import CODEBASE_DIR
     
@@ -128,7 +186,7 @@ async def process_codebase(ignore_patterns: List[str] = None) -> List[str]:
     # Ensure codebase directory exists
     if not os.path.exists(CODEBASE_DIR):
         print(f"Codebase directory '{CODEBASE_DIR}' does not exist.")
-        return []
+        return []  # Empty list of dictionaries
     
     # Load custom ignore patterns if .lightragignore exists
     lightragignore_path = os.path.join(CODEBASE_DIR, '.lightragignore')
@@ -138,4 +196,8 @@ async def process_codebase(ignore_patterns: List[str] = None) -> List[str]:
             ignore_patterns.extend(custom_patterns)
     
     # Use the directory-based approach
-    return await process_codebase_by_directory(CODEBASE_DIR, ignore_patterns=ignore_patterns)
+    return await process_codebase_by_directory(
+        CODEBASE_DIR, 
+        ignore_patterns=ignore_patterns,
+        **CHUNKING_SETTINGS
+    )

@@ -58,7 +58,8 @@ async def main():
         # Write chunks to file for testing
         with open("chunks.txt", "w") as f:
             for chunk in all_chunks:
-                f.write(chunk + "\n")
+                f.write(f"File: {chunk['file_path']}\n")
+                f.write(f"Content: {chunk['content']}\n\n")
         
         # Insert chunks into RAG
         # Comment to test chunks first
